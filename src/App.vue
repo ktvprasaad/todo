@@ -1,28 +1,77 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <md-field>
+      <md-input v-model="currentTodo" @keydown.enter="addTodo()"
+        maxlength="50" placeholder="Add a Todo"></md-input>
+    </md-field>
+    <ul class="todos">
+      <li v-for="todo in todos" :key="todo.id">
+        <input class="checked" type="checkbox" v-model="todo.completed">
+        <span :class="{completed: todo.completed}" @dblclick="editTodo(todo)" v-if="!todo.edit">
+          {{ todo.label }}
+        </span>
+        <input type="text" v-else v-model="todo.label" @keydown.enter="editDone(todo)">
+        <md-button @click="removeTodo(todo)">X</md-button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      todos: [],
+      currentTodo: ''
+    };
+  },
+  methods: {
+    addTodo() {
+      this.todos.push({
+        id: this.todos.length, 
+        label: this.currentTodo, 
+        completed: false, 
+        edit: false
+      });
+      this.currentTodo = '';
+    },
+    removeTodo(todo) {
+      var index = this.todos.indexOf(todo);
+      this.todos.splice(index,1);
+    },
+    editTodo(todo) {
+      todo.edit = true;
+    },
+    editDone(todo) {
+      todo.edit = false;
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .container {
+    max-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    display: inline;
+    color: blue;
+  }
+  md-input {
+    max-width: 200px;
+    border-radius: 2px;
+    border-color: blue;
+  }
+  li {
+    list-style: none;
+    margin: 10px;
+  }
+  .completed {
+    text-decoration: line-through;
+    color:coral;
+  }
+  md-button {
+    font-size: 20px;
+    /* float:right; */
+  }
 </style>
