@@ -20,6 +20,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:ktvprasaad/ktvprasaad.github.io.git master
 
 # if you are deploying to https://ktvprasaad.github.io/todo
-sudo git push -f git@github.com:ktvprasaad/todo.git master:gh-pages
+git push -f git@github.com:ktvprasaad/todo.git master:gh-pages
 
 cd -
