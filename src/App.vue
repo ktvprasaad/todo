@@ -13,9 +13,6 @@
     <ul class="todos">
       <li v-for="todo in todos" :key="todo.id">
         <md-checkbox class="md-primary" type="checkbox" v-model="todo.completed">+</md-checkbox>
-        <!-- <input> -->
-        <!-- <md-checkbox v-model="todo.completed"> -->
-        <!-- <input md-checked v-model="todo.completed"> -->
          <span :class="{completed: todo.completed}" @dblclick="editTodo(todo)" v-if="!todo.edit">
           {{ todo.label }}
           </span>
