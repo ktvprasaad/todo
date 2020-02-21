@@ -90,7 +90,6 @@ export default {
   }
   .md-checkbox {
     background-color: #C3E86C;
-    display: flex;
   }
   /* .md-button:hover { */
     /* border-radius: 90%; */
